@@ -12,8 +12,9 @@ module.exports.encryptMaster = () => {
   encrypt(process.env.MASTERPASSWORD);
 };
 
-module.exports.login = (app) => {
+module.exports.tokens = (app) => {
   app.post("/login", (req, res) => {
+    console.log(req.body);
     const { username, password } = req.body;
     if (compare(username, password)) {
       const authToken = generateToken(username);
@@ -22,8 +23,10 @@ module.exports.login = (app) => {
         process.env.REFRESH_TOKEN_SECRET
       );
       refreshTokens.set(refreshToken);
-      res.header("auth", authToken);
-      res.header("refreshToken", refreshToken);
+      res.json({
+        auth: authToken,
+        refreshToken: refreshToken,
+      });
 
       return res.status(200).send("ok");
     }
@@ -43,8 +46,10 @@ module.exports.login = (app) => {
         process.env.REFRESH_TOKEN_SECRET
       );
       refreshTokens.set(refreshToken);
-      res.header("auth", accessToken);
-      res.header("refreshToken", refreshToken);
+      res.json({
+        auth: accessToken,
+        refreshToken: refreshToken,
+      });
 
       return res.status(200).send("ok");
     });

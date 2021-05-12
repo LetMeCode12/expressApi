@@ -10,4 +10,4 @@ Aplikacja wymaga podania hasła oraz nazwy użytkownika. Hasło do aplikacji to:
 Nazwa użytkownika dowolna.
 
 ## Testy:
-Testy aplikacji web oraz server uruchamiamy poleceniem - npm test, po przejściu do folderu głownego aplikacji serverowej lub web.
+Testy aplikacji web oraz server uruchamiamy poleceniem - npm test, po przejściu do folderu głównego aplikacji serwerowej lub web.

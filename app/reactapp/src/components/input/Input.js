@@ -16,7 +16,7 @@ const MyInput = (props) => {
   return (
     <FormGroup>
       <Label>{label}</Label>
-      <Input invalid={onError()} {...field} {...rest} />
+      <Input invalid={onError()} title={field.name} {...field} {...rest} />
       {onError() && <ErrorMesage>{errors[field.name]}</ErrorMesage>}
     </FormGroup>
   );

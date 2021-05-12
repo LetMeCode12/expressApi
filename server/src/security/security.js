@@ -1,4 +1,4 @@
-const { encrypt, compare } = require("./securityUtils");
+const { encode, compare } = require("./securityUtils");
 const JWT = require("jsonwebtoken");
 const nodeCache = require("node-cache");
 const { generateToken } = require("./jwt");
@@ -9,12 +9,11 @@ const refreshTokens = new nodeCache({
 });
 
 module.exports.encryptMaster = () => {
-  encrypt(process.env.MASTERPASSWORD);
+  encode(process.env.MASTERPASSWORD);
 };
 
 module.exports.tokens = (app) => {
   app.post("/login", (req, res) => {
-    console.log(req.body);
     const { username, password } = req.body;
     if (compare(username, password)) {
       const authToken = generateToken(username);

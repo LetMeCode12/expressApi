@@ -27,7 +27,7 @@ const MainPage = (props) => {
   };
 
   const onDecode = () => {
-    console.log("decdoe:", decode(decodeInput.current.value));
+    // console.log("decdoe:", decode(decodeInput.current.value));
     setDecodeData(decode(decodeInput.current.value));
   };
 

@@ -6,6 +6,8 @@ services:
     container_name: api
     volumes:
         - ./api:/home/node/app
+    networks:
+        - my-network
     ports:
         - 8000:8000
   web:
@@ -13,8 +15,13 @@ services:
     container_name: web
     volumes:
         - ./web:/home/node/app
+    networks:
+        - my-network
     ports:
         - 3000:3000
     depends_on:
         - api
+networks:
+    my-network:
+        driver: bridge
 

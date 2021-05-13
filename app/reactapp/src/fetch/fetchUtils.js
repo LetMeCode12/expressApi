@@ -1,20 +1,28 @@
 export const authFetch = async (path, history, method, body) => {
   const token = await localStorage.getItem("token");
   if (token) {
-    const res = await fetch(process.env.REACT_APP_URL + path, {
-      method: method || "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: body ? JSON.stringify(body) : undefined,
-    });
+    try {
+      const res = await fetch(process.env.REACT_APP_URL + path, {
+        method: method || "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: body ? JSON.stringify(body) : undefined,
+      });
 
-    if (res.status === 200) {
-      const data = await res.json();
-      return data;
+      if (res.status === 200) {
+        const data = await res.json();
+        return data;
+      }
+      console.log(res.status);
+      return await updateToken(path, history, method, body);
+    } catch (e) {
+      console.error(e);
+      localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
+      history.push("/login");
     }
-    return updateToken(path, history, method, body);
   } else {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
@@ -23,6 +31,7 @@ export const authFetch = async (path, history, method, body) => {
 };
 
 const updateToken = async (path, history, method, _body) => {
+  console.log("Weszlo:");
   const token = await localStorage.getItem("refreshToken");
   if (token) {
     const body = {

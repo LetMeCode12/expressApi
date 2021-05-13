@@ -52,7 +52,7 @@ const MainPage = (props) => {
           className="my-2"
           outline
           color="primary"
-          onClick={() => onEncode()}
+          onClick={onEncode}
         >
           Zakoduj
         </Button>
@@ -66,8 +66,7 @@ const MainPage = (props) => {
           className="my-2"
           outline
           color="primary"
-          onClick={() => onDecode()}
-        >
+          onClick={onDecode}>
           Odkoduj
         </Button>
         <p>{decodeData}</p>
